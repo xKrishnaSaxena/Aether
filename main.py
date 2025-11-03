@@ -1,12 +1,14 @@
 import asyncio
 import os
+os.environ['JACK_NO_AUDIO_RESERVATION'] = '1'
+os.environ['PYALSA_IGNORE_DLOPEN_ERRORS'] = '1'
+os.environ['ALSA_PCM_CARD'] = '0'
 import datetime
 import json
 import subprocess
 import tempfile
-import re
 from typing import TypedDict, Annotated, Sequence
-from langgraph.graph import StateGraph, END
+from langgraph.graph import StateGraph
 from langgraph.graph.message import add_messages
 from langchain_core.messages import BaseMessage, HumanMessage, AIMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -119,7 +121,7 @@ def process_query_node(state: State) -> State:
         state["action"] = "search" if parsed.get("needs_search", "yes") == "yes" else "direct"
     except Exception:
         state["topic"] = state["user_input"]
-        state["action"] = "search"  # Default to search
+        state["action"] = "search"  
     state["messages"].append(HumanMessage(content=state["user_input"]))
     if state["action"] == "direct":
         state["messages"].append(AIMessage(content="Direct command noted."))
