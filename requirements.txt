@@ -1,0 +1,11 @@
+langgraph
+langchain-core
+langchain-google-genai
+langchain-community
+speechrecognition
+pyttsx3
+pyaudio
+duckduckgo-search
+ddgs
+edge-tts
+python-dotenv
