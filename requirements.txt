@@ -8,4 +8,5 @@ pyaudio
 duckduckgo-search
 ddgs
 edge-tts
+pygame
 python-dotenv
